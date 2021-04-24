@@ -13,28 +13,83 @@ import {
   Typography,
 } from "@material-ui/core";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+// import { v4 } from "uuid";
+import { MoneyContext } from "../contexts/MoneyContext";
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650,
+    minWidth: 50,
   },
   root: {
     marginTop: theme.spacing(4),
   },
 }));
 
-function createData(name, type, amount, date, desc) {
-  return { name, type, amount, date, desc };
-}
+// function createData(id, name, type, amount, date, desc) {
+//   return { id, name, type, amount, date, desc };
+// }
 
-const rows = [
-  createData("Pocket money", "Income", 500, "23/04/21", "Woohoo free money!!"),
-];
+// const rows = [
+//   createData(
+//     v4(),
+//     "Pocket money",
+//     "Income",
+//     500,
+//     "23/04/21",
+//     "Woohoo free money!!"
+//   ),
+// ];
+
+const Row = (props) => {
+  const { row } = props;
+  const [open, setOpen] = useState(false);
+
+  return (
+    <React.Fragment>
+      <TableRow>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.name}
+        </TableCell>
+        <TableCell align="right">
+          {row.type === "income" ? "Income" : "Expense"}
+        </TableCell>
+        <TableCell align="right">{row.amount}</TableCell>
+        <TableCell align="right">{row.date}</TableCell>
+      </TableRow>
+
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <Typography variant="body1" gutterBottom>
+                Description:
+              </Typography>
+              <Typography variant="body2">
+                {row.desc
+                  ? row.desc
+                  : "No description provided for this transaction."}
+              </Typography>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+};
 
 const BalanceSheet = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const { records } = useContext(MoneyContext);
 
   return (
     <div className={classes.root}>
@@ -50,42 +105,9 @@ const BalanceSheet = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <>
-                <TableRow key={row.name}>
-                  <TableCell>
-                    <IconButton
-                      aria-label="expand row"
-                      size="small"
-                      onClick={() => setOpen(!open)}
-                    >
-                      {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                    </IconButton>
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.type}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
-                  <TableCell align="right">{row.date}</TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
-                    colSpan={6}
-                  >
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                      <Box margin={1}>
-                        <Typography variant="body1" gutterBottom>
-                          Description:
-                        </Typography>
-                        <Typography variant="body2">{row.desc}</Typography>
-                      </Box>
-                    </Collapse>
-                  </TableCell>
-                </TableRow>
-              </>
+            {records.map((row) => (
+              // {rows.map((row) => (
+              <Row key={row.id} row={row} />
             ))}
           </TableBody>
         </Table>

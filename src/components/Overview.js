@@ -1,6 +1,7 @@
 import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MoneyContext } from "../contexts/MoneyContext";
 import DialogueForm from "./DialogueForm";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,18 +49,22 @@ const Overview = () => {
     setOpen(false);
   };
 
+  const { income, expense, balance } = useContext(MoneyContext);
+
   return (
     <div>
       <div className={classes.topText}>
-        <Typography variant="h6">Your Balance</Typography>
-        <Typography variant="subtitle1">₹ 0.00</Typography>
+        <Typography variant="h6">
+          {balance >= 0 ? "Your Balance" : "Your Debt"}
+        </Typography>
+        <Typography variant="subtitle1">₹ {balance}</Typography>
       </div>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={6}>
           <Paper className={classes.paperGreen}>
             <div className={classes.paperText}>
               <Typography variant="body1">Income</Typography>
-              <Typography variant="body1">₹ 0.00</Typography>
+              <Typography variant="body1">₹ {income}</Typography>
             </div>
           </Paper>
         </Grid>
@@ -67,7 +72,7 @@ const Overview = () => {
           <Paper className={classes.paperRed}>
             <div className={classes.paperText}>
               <Typography variant="body1">Expense</Typography>
-              <Typography variant="body1">₹ 0.00</Typography>
+              <Typography variant="body1">₹ {expense}</Typography>
             </div>
           </Paper>
         </Grid>
