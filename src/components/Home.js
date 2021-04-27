@@ -1,8 +1,8 @@
 import { Container, Grid } from "@material-ui/core";
 import Appbar from "./Appbar";
 import Overview from "./Overview";
-import BalanceSheet from "./BalanceSheet";
 import MoneyContextProvider from "../contexts/MoneyContext";
+import NewBalanceSheet from "./NewBalanceSheet";
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
               <Overview />
             </Grid>
             <Grid item xs={12} md={8}>
-              <BalanceSheet />
+              <NewBalanceSheet />
             </Grid>
           </Grid>
         </Container>

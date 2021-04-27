@@ -57,14 +57,14 @@ const Row = (props) => {
             {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell align="center">{row.date}</TableCell>
+        <TableCell component="th" scope="row" align="center">
           {row.name}
         </TableCell>
-        <TableCell align="right">
+        <TableCell align="center">
           {row.type === "income" ? "Income" : "Expense"}
         </TableCell>
-        <TableCell align="right">{row.amount}</TableCell>
-        <TableCell align="right">{row.date}</TableCell>
+        <TableCell align="center">{row.amount}</TableCell>
       </TableRow>
 
       <TableRow>
@@ -98,10 +98,10 @@ const BalanceSheet = () => {
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>Name of the Transaction</TableCell>
-              <TableCell align="right">Type</TableCell>
-              <TableCell align="right">Amount&nbsp;(₹)</TableCell>
-              <TableCell align="right">Date</TableCell>
+              <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Name of the Transaction</TableCell>
+              <TableCell align="center">Type</TableCell>
+              <TableCell align="center">Amount&nbsp;(₹)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
