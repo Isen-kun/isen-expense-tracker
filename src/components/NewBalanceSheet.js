@@ -148,10 +148,15 @@ const EnhancedTableToolbar = (props) => {
   const { numSelected, selected, setSelected } = props;
   const { removeRecords } = useContext(MoneyContext);
 
+  // const handleDelete = () => {
+  //   selected.forEach((id) => {
+  //     removeRecords(id);
+  //   });
+  //   setSelected([]);
+  // };
+
   const handleDelete = () => {
-    selected.forEach((id) => {
-      removeRecords(id);
-    });
+    removeRecords(selected);
     setSelected([]);
   };
 

@@ -37,8 +37,16 @@ const MoneyContextProvider = (props) => {
     setRecords([...records, record]);
   };
 
-  const removeRecords = (id) => {
-    setRecords(records.filter((record) => record.id !== id));
+  // const removeRecords = (id) => {
+  //   setRecords(records.filter((record) => record.id !== id));
+  // };
+
+  const removeRecords = (ids = []) => {
+    //if you set state in a frequent way
+    //this type of setState is more safer
+    setRecords((prev) => {
+      return prev.filter((record) => !ids.includes(record.id));
+    });
   };
 
   return (
