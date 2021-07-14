@@ -1,13 +1,22 @@
 import { Container, Grid } from "@material-ui/core";
-import Appbar from "./Appbar";
+import ButtonAppbar from "./Appbar";
 import Overview from "./Overview";
 import MoneyContextProvider from "../contexts/MoneyContext";
 import NewBalanceSheet from "./NewBalanceSheet";
+import Footer from "./Footer";
+import { teal } from "@material-ui/core/colors";
 
 const Home = () => {
   return (
-    <>
-      <Appbar />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        background: teal[100],
+      }}
+    >
+      <ButtonAppbar />
       <MoneyContextProvider>
         <Container>
           <Grid container spacing={5}>
@@ -20,7 +29,8 @@ const Home = () => {
           </Grid>
         </Container>
       </MoneyContextProvider>
-    </>
+      <Footer />
+    </div>
   );
 };
 

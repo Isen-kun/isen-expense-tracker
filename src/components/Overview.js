@@ -1,20 +1,26 @@
 import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+import { green, red, blueGrey } from "@material-ui/core/colors";
 import { useContext, useState } from "react";
 import { MoneyContext } from "../contexts/MoneyContext";
 import DialogueForm from "./DialogueForm";
 
 const useStyles = makeStyles((theme) => ({
   paperGreen: {
-    backgroundColor: green[400],
+    backgroundColor: green[500],
     textAlign: "center",
     height: theme.spacing(10),
     position: "relative",
   },
   paperRed: {
-    backgroundColor: red[400],
+    backgroundColor: red[500],
     textAlign: "center",
     height: theme.spacing(10),
+    position: "relative",
+  },
+  paperWhite: {
+    backgroundColor: blueGrey[500],
+    textAlign: "center",
+    height: theme.spacing(12),
     position: "relative",
   },
   paperText: {
@@ -25,11 +31,12 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     margin: "auto",
     height: theme.spacing(6),
+    color: "white",
   },
   topText: {
     textAlign: "center",
     marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(6),
+    marginBottom: theme.spacing(1),
   },
   button: {
     marginTop: theme.spacing(6),
@@ -54,10 +61,12 @@ const Overview = () => {
   return (
     <div>
       <div className={classes.topText}>
-        <Typography variant="h6">
-          {balance >= 0 ? "Your Balance" : "Your Debt"}
-        </Typography>
-        <Typography variant="subtitle1">₹ {balance}</Typography>
+        <Paper className={classes.paperWhite}>
+          <div className={classes.paperText}>
+            <Typography variant="h6">Your Balance</Typography>
+            <Typography variant="body1">₹ {balance}</Typography>
+          </div>
+        </Paper>
       </div>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={6}>

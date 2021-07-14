@@ -1,46 +1,48 @@
-import {
-  AppBar,
-  IconButton,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { teal } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(5),
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
   },
+  userInfo: {
+    paddingRight: theme.spacing(3),
+  },
 }));
 
-const Appbar = () => {
+export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: teal[400] }}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h4" className={classes.title}>
-            Expense tracker
+          </IconButton> */}
+          <Typography variant="h4" className={classes.title} align="center">
+            Expense Tracker
           </Typography>
         </Toolbar>
       </AppBar>
     </div>
   );
-};
-
-export default Appbar;
+}
